@@ -7,7 +7,6 @@ function Contact() {
         <h2 className="text-3xl font-bold mb-4">Contact Me</h2>
         <p className="mb-6">Feel free to reach out via email or connect with me on GitHub and LinkedIn!</p>
         <div className="flex justify-center items-center gap-4">
-          {/* Gmail */}
           <a
             href="mailto:trongthinh2602@example.com"
             className="flex items-center gap-2 text-yellow-500 hover:scale-110 hover:transition-transform"
@@ -22,7 +21,6 @@ function Contact() {
           >
             <FaGithub className="text-2xl" />
           </a>
-          {/* LinkedIn */}
           <a
             href="https://www.linkedin.com/in/th%E1%BB%8Bnh-%C4%91%E1%BB%97-31866b220/"
             target="_blank"

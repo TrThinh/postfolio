@@ -1,4 +1,5 @@
 import { FaGithub, FaUser, FaEye } from "react-icons/fa";
+import React, { useState } from "react";
 
 function Projects() {
   return (
@@ -8,6 +9,7 @@ function Projects() {
           Projects
         </h2>
         <div className="grid md:grid-cols-2 gap-6 perspective-1000 md:px-4">
+          {/* Card 1 */}
           <div className="bg-purple500 p-6 rounded text-purple100 border-purple300 shadow-purple300 shadow-lg transform transition-transform duration-300 hover:scale-105 hover:-rotate-1 hover:translate-y-1 hover:shadow-lg hover:shadow-purple300">
             <div className="flex justify-between">
               <h3 className="text-xl font-semibold mb-2">Book Shop</h3>
@@ -80,7 +82,7 @@ function Projects() {
               </a>
             </div>
           </div>
-
+          {/* Card 2 */}
           <div className="bg-purple500 p-6 rounded text-purple100 border-purple300 shadow-purple300 shadow-lg transform transition-transform duration-300 hover:scale-105 hover:rotate-1 hover:translate-y-1 hover:shadow-lg hover:shadow-purple300">
             <div className="flex justify-between">
               <h3 className="text-xl font-semibold mb-2">Magazine CMS</h3>
@@ -154,7 +156,7 @@ function Projects() {
               </a>
             </div>
           </div>
-
+          {/* Card 3 */}
           <div className="bg-purple500 p-6 rounded text-purple100 border-purple300 shadow-purple300 shadow-lg transform transition-transform duration-300 hover:scale-105 hover:-rotate-1 hover:translate-y-1 hover:shadow-lg hover:shadow-purple300">
             <div className="flex justify-between">
               <h3 className="text-xl font-semibold mb-2">Quizz AI</h3>
@@ -239,7 +241,7 @@ function Projects() {
               </div>
             </div>
           </div>
-
+          {/* Card 4 */}
           <div className="bg-purple500 p-6 rounded text-purple100 border-purple300 shadow-purple300 shadow-lg transform transition-transform duration-300 hover:scale-105 hover:rotate-1 hover:translate-y-1 hover:shadow-lg hover:shadow-purple300">
             <div className="flex justify-between">
               <h3 className="text-xl font-semibold mb-2">Green Prep</h3>
