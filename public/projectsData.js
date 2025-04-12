@@ -2,7 +2,7 @@ export const projectsData = [
     {
       title: "Book Shop",
       people: 3,
-      description: "Management book as a library for a book store.",
+      description: "Management book as a library for a bookstore.",
       roles: ["Project Manager", "Developer", "Designer UI/UX", "Tester", "Data"],
       tools: ["GitHub", "Git", "Diagrams"],
       start: "December 16, 2023",
@@ -33,7 +33,7 @@ export const projectsData = [
     {
       title: "Green Prep",
       people: 20,
-      description: "A website testing platform for students to practice and prepare for the VSTEP exam of an University school.",
+      description: "A website testing platform for students to practice and prepare for the VSTEP exam of a University school.",
       roles: ["Developer"],
       tools: ["GitHub", "Git", "Scrum", "Jira", "Figma", "Slack"],
       start: "March 18, 2025",

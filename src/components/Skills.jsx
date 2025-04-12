@@ -1,5 +1,4 @@
 import { FaReact, FaHtml5, FaCss3Alt, FaGitAlt, FaJs } from "react-icons/fa";
-import { FaH } from "react-icons/fa6";
 import { SiFirebase, SiGithub, SiJavascript, SiMysql, SiTailwindcss } from "react-icons/si";
 import { SiDotnet } from "react-icons/si";
 

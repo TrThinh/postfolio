@@ -2,7 +2,6 @@ import React, { Suspense, useState, useEffect } from "react";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, useGLTF } from "@react-three/drei";
 import { FaArrowUp, FaEnvelope } from "react-icons/fa";
-import { Typewriter } from "react-simple-typewriter";
 
 const Model = ({ rotation }) => {
   const gltf = useGLTF("/model.glb");
