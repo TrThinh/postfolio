@@ -59,7 +59,7 @@ function Hero() {
             Final-year IT student & .NET enthusiast
           </p>
         </div>
-        <div className="hidden sm:block fixed top-0 left-0 md:w-1/6 lg:w-1/6 xl:w-1/5 md:h-[400px] lg:h-[400px] xl:h-[500px] pointer-events-none z-0">
+        <div className="hidden sm:block fixed top-0 left-0 md:w-1/6 lg:w-1/6 xl:w-1/5 md:h-[400px] lg:h-[400px] xl:h-[500px] pointer-events-none z-10">
           <p className="fixed md:w-1/6 lg:w-1/6 xl:w-1/5 top-20 text-xl font-extrabold">
             Thịnh
           </p>

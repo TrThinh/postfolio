@@ -18,7 +18,16 @@ export default {
         orange300: "#ff8500",
         orange200: "#ff9100",
         orange100: "#ff9e00",
-      }
+      },
+      animation: {
+        'scale-in': 'scaleIn 0.3s ease-out forwards',
+      },
+      keyframes: {
+        scaleIn: {
+          '0%': { transform: 'scale(0)', opacity: '0' },
+          '100%': { transform: 'scale(1)', opacity: '1' },
+        },
+      },
     },
   },
   plugins: [],
