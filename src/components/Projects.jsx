@@ -133,8 +133,12 @@ function Projects() {
           className="fixed inset-0 bg-black bg-opacity-60 flex justify-center items-center z-50"
           onClick={() => setSelectedProject(null)}
         >
-          <div
-            className="bg-purple500 p-6 rounded text-purple-300 font-semibold border-purple300 shadow-purple300 shadow-lg transform scale-0 animate-scale-in transition-transform duration-300 relative w-full max-w-xl"
+          <motion.div
+            initial={{ scale: 0, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0, opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="bg-purple500 p-6 rounded text-purple-300 font-semibold border-purple300 shadow-purple300 shadow-lg relative w-full max-w-xl"
             onClick={(e) => e.stopPropagation()}
           >
             <button
@@ -226,7 +230,7 @@ function Projects() {
                 </a>
               )}
             </div>
-          </div>
+          </motion.div>
         </div>
       )}
     </motion.section>

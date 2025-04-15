@@ -8,10 +8,18 @@ const Model = ({ rotation }) => {
   return <primitive object={gltf.scene} scale={1.5} rotation={rotation} />;
 };
 
+const skills = [".Net Development", "UX Development", "React Development"];
+const TYPING_SPEED = 100;
+const DELETING_SPEED = 50;
+const PAUSE_TIME = 1500;
+
 function Hero() {
   const [rotation, setRotation] = useState([0, 5, 0]);
   const [isAtContact, setIsAtContact] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [text, setText] = useState("");
+  const [wordIndex, setWordIndex] = useState(0);
+  const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -32,6 +40,30 @@ function Hero() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  useEffect(() => {
+    const currentWord = skills[wordIndex];
+    let timeout;
+
+    if (isDeleting) {
+      timeout = setTimeout(() => {
+        setText((prev) => prev.slice(0, -1));
+      }, DELETING_SPEED);
+    } else {
+      timeout = setTimeout(() => {
+        setText((prev) => currentWord.slice(0, prev.length + 1));
+      }, TYPING_SPEED);
+    }
+
+    if (!isDeleting && text === currentWord) {
+      timeout = setTimeout(() => setIsDeleting(true), PAUSE_TIME);
+    } else if (isDeleting && text === "") {
+      setIsDeleting(false);
+      setWordIndex((prev) => (prev + 1) % skills.length);
+    }
+
+    return () => clearTimeout(timeout);
+  }, [text, isDeleting, wordIndex]);
+
   const scrollToContact = () => {
     document.querySelector("#contact").scrollIntoView({ behavior: "smooth" });
   };
@@ -43,23 +75,26 @@ function Hero() {
   return (
     <section
       id="hero"
-      className="md:h-[500px] h-[290px] flex items-center justify-center text-center text-white px-4"
+      className="md:h-[500px] h-[290px] flex items-center justify-center text-center text-white px-4 z-[1]"
     >
       <div className="flex flex-col">
         <div>
           <h1 className="text-4xl md:text-6xl font-bold mb-4">
             Hi, I'm{" "}
             <span className="before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-purple200 relative inline-block">
-              <span className="relative text-white">Thinh</span>
+              <span className="relative text-white bg-gradient-to-r from-[#240046] via-[#5a189a] to-[#c77dff] bg-clip-text text-transparent">
+                Thinh
+              </span>
             </span>
             👋
           </h1>
-          <p className="text-lg md:text-2xl mb-10">
-            Final-year IT student & .NET enthusiast
+          <p className="text-lg md:text-2xl mb-10 text-center font-semibold h-10">
+            {text}
+            <span className="border-r-2 border-white animate-pulse ml-1"></span>
           </p>
         </div>
         <div className="hidden sm:block fixed top-0 left-0 md:w-1/6 lg:w-1/6 xl:w-1/5 md:h-[400px] lg:h-[400px] xl:h-[500px] pointer-events-none z-10">
-          <p className="fixed md:w-1/6 lg:w-1/6 xl:w-1/5 top-20 text-xl font-extrabold">
+          <p className="fixed md:w-1/6 lg:w-1/6 xl:w-1/5 top-20 text-xl font-extrabold bg-gradient-to-r from-[#240046] via-[#5a189a] to-[#c77dff] bg-clip-text text-transparent">
             Thịnh
           </p>
           <Canvas camera={{ position: [0, 1, 4], fov: 50 }}>
@@ -94,7 +129,6 @@ function Hero() {
         {showModal && (
           <div className="fixed inset-0 bg-black bg-opacity-60 flex justify-center items-center z-50">
             <div className="bg-white w-[90%] md:w-[800px] h-[90%] relative rounded-lg overflow-hidden shadow-lg">
-
               <button
                 onClick={() => setShowModal(false)}
                 className="absolute top-2 right-3 text-xl text-gray-500 hover:text-red-500"

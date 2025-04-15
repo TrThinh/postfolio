@@ -28,6 +28,18 @@ export default {
           '100%': { transform: 'scale(1)', opacity: '1' },
         },
       },
+      backgroundImage: {
+        'gradient-custom': 'linear-gradient(-45deg, #240046, #5a189a, #c77dff)',
+      },
+      animation: {
+        'gradient-x': 'gradient-x 10s ease infinite',
+      },
+      keyframes: {
+        'gradient-x': {
+          '0%, 100%': { backgroundPosition: '0% 50%' },
+          '50%': { backgroundPosition: '100% 50%' },
+        },
+      },
     },
   },
   plugins: [],
