@@ -43,7 +43,7 @@ function Hero() {
   return (
     <section
       id="hero"
-      className="bg-purple500 md:h-[500px] h-[290px] flex items-center justify-center text-center text-white px-4"
+      className="md:h-[500px] h-[290px] flex items-center justify-center text-center text-white px-4"
     >
       <div className="flex flex-col">
         <div>

@@ -1,16 +1,69 @@
 import { FaGithub, FaUser, FaEye, FaTimes } from "react-icons/fa";
 import React, { useState } from "react";
 import { projectsData } from "../../public/projectsData";
+import { motion, useAnimation } from "framer-motion";
+import { useInView } from "react-intersection-observer";
+import { useEffect } from "react";
 
 function Projects() {
   const [selectedProject, setSelectedProject] = useState(null);
+  const title = "Projects";
+  const letters = title.split("");
+
+  const controls = useAnimation();
+  const [ref, inView] = useInView({ threshold: 0.2 });
+
+  useEffect(() => {
+    if (inView) {
+      controls.start({ opacity: 1, y: 0 });
+    } else {
+      controls.start({ opacity: 0, y: 50 });
+    }
+  }, [inView, controls]);
+
+  useEffect(() => {
+    if (selectedProject) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [selectedProject]);
 
   return (
-    <section id="projects" className="bg-purple500 py-16 px-4 relative z-0">
+    <motion.section
+      ref={ref}
+      initial={{ opacity: 0, y: 50 }}
+      animate={controls}
+      transition={{ duration: 0.6 }}
+      id="projects"
+      className="py-16 px-4 relative z-0"
+    >
       <div className="max-w-4xl mx-auto">
-        <h2 className="text-3xl font-bold mb-8 text-white text-center">
-          Projects
+        <h2 className="text-3xl font-bold mb-8 text-white text-center flex justify-center">
+          {letters.map((letter, index) => (
+            <motion.span
+              key={`${inView}-${index}`}
+              initial={{ y: 100, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{
+                delay: index * 0.1,
+                type: "spring",
+                stiffness: 120,
+                damping: 20,
+              }}
+              className="inline-block text-transparent bg-clip-text 
+        bg-gradient-to-r from-purple-500 to-pink-500 
+        dark:from-purple-300 dark:to-pink-300"
+            >
+              {letter}
+            </motion.span>
+          ))}
         </h2>
+
         <div className="grid md:grid-cols-2 gap-6 md:px-4 z-20">
           {projectsData.map((project, index) => (
             <div
@@ -84,7 +137,6 @@ function Projects() {
             className="bg-purple500 p-6 rounded text-purple-300 font-semibold border-purple300 shadow-purple300 shadow-lg transform scale-0 animate-scale-in transition-transform duration-300 relative w-full max-w-xl"
             onClick={(e) => e.stopPropagation()}
           >
-
             <button
               className="absolute top-3 right-3 text-purple200 hover:text-white"
               onClick={() => setSelectedProject(null)}
@@ -112,7 +164,6 @@ function Projects() {
             </p>
 
             <ol className="flex items-center mt-2">
-
               <li className="relative mb-6 sm:mb-0 flex-1">
                 <div className="flex items-center">
                   <div className="z-10 flex items-center justify-center w-6 h-6 bg-purple-700 rounded-full shrink-0">
@@ -178,7 +229,7 @@ function Projects() {
           </div>
         </div>
       )}
-    </section>
+    </motion.section>
   );
 }
 

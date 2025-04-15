@@ -6,7 +6,7 @@ import Contact from './components/Contacts'
 
 function App() {
   return (
-    <main className="scroll-smooth font-sans text-gray-800 bg-gray-700">
+    <main className="scroll-smooth font-sans bg-purple500">
       <Hero />
       <About />
       <Projects />
