@@ -16,6 +16,7 @@ import {
 import React from "react";
 import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
+import AnimatedTitle from "./Effect/AnimatedTitle";
 
 const skills = [
   {
@@ -105,43 +106,10 @@ function SkillItem({ skill, delay }) {
 }
 
 function Skills() {
-  const controls = useAnimation();
-  const [ref, inView] = useInView({ threshold: 0.2 });
-
-  React.useEffect(() => {
-    if (inView) {
-      controls.start({ opacity: 1, y: 0 });
-    } else {
-      controls.start({ opacity: 0, y: 50 });
-    }
-  }, [inView, controls]);
-
-  const title = "Skills";
-  const letters = title.split("");
-
   return (
     <section id="skills" className="py-16 px-4 z-10">
       <div className="max-w-3xl mx-auto text-white">
-        <h2 className="text-3xl font-bold mb-4 text-center flex justify-center">
-          {letters.map((letter, index) => (
-            <motion.span
-              key={`${inView}-${index}`}
-              initial={{ y: 100, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{
-                delay: index * 0.1,
-                type: "spring",
-                stiffness: 120,
-                damping: 20,
-              }}
-              className="inline-block text-transparent bg-clip-text 
-                bg-gradient-to-r from-purple-500 to-pink-500 
-                dark:from-purple-300 dark:to-pink-300"
-            >
-              {letter}
-            </motion.span>
-          ))}
-        </h2>
+        <AnimatedTitle text="Skills" />
         <div className="grid grid-cols-3 gap-4 md:px-4">
           {skills.map((skill, index) => (
             <SkillItem key={index} skill={skill} delay={index * 0.1} />
