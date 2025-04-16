@@ -1,12 +1,18 @@
 import { FaGithub, FaUser, FaEye, FaTimes } from "react-icons/fa";
 import React, { useState } from "react";
 import { projectsData } from "../../public/projectsData";
-import { motion, useAnimation } from "framer-motion";
+import { motion, useAnimation, AnimatePresence } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { useEffect } from "react";
 
 function Projects() {
   const [selectedProject, setSelectedProject] = useState(null);
+  const [activeFramework, setActiveFramework] = useState("All");
+
+  const handleFilterClick = (framework) => {
+    setActiveFramework(framework);
+  };
+
   const title = "Projects";
   const letters = title.split("");
 
@@ -64,67 +70,97 @@ function Projects() {
           ))}
         </h2>
 
+        <div className="flex gap-2 m-4">
+          {["All", ".Net", "React", "Tailwind Css", "Bootstrap"].map(
+            (fw, idx) => (
+              <p
+                key={idx}
+                onClick={() => handleFilterClick(fw)}
+                className={`border-2 border-purple-300 w-fit py-[4px] px-4 rounded-3xl text-lg font-medium 
+        ${
+          activeFramework === fw
+            ? "bg-purple-300 text-purple-800"
+            : "text-purple-300 hover:bg-purple-300 hover:text-purple-800"
+        } 
+        cursor-pointer transition`}
+              >
+                {fw}
+              </p>
+            )
+          )}
+        </div>
+
         <div className="grid md:grid-cols-2 gap-6 md:px-4 z-20">
-          {projectsData.map((project, index) => (
-            <div
-              key={index}
-              className="bg-purple500 p-6 rounded text-purple100 border-purple300 shadow-purple300 shadow-lg transform transition-transform duration-300 hover:scale-105 hover:-rotate-1 hover:translate-y-1 cursor-pointer"
-              onClick={() => setSelectedProject(project)}
-            >
-              <div className="flex justify-between">
-                <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
-                <h2 className="flex items-center">
-                  <FaUser className="mr-1" />
-                  {project.people} People
-                </h2>
-              </div>
+          {projectsData
+            .filter((project) => {
+              if (activeFramework === "All") return true;
+              return project.framework.includes(activeFramework);
+            })
+            .map((project, index) => (
+              <div
+                key={index}
+                className="bg-purple500 p-6 rounded text-purple100 border-purple300 shadow-purple300 shadow-lg transform transition-transform duration-300 hover:scale-105 hover:-rotate-1 hover:translate-y-1 cursor-pointer"
+                onClick={() => setSelectedProject(project)}
+              >
+                <div className="flex justify-between">
+                  <h3 className="text-xl font-semibold mb-2">
+                    {project.title}
+                  </h3>
+                  <h2 className="flex items-center">
+                    <FaUser className="mr-1" />
+                    {project.people}{" "}
+                    {project.people === 1 ? "Person" : "People"}
+                  </h2>
+                </div>
 
-              <ol className="flex items-center mt-2">
-                <li className="flex-1">
-                  <div className="flex items-center">
-                    <div className="z-10 w-6 h-6 bg-purple-700 rounded-full flex justify-center items-center">
-                      <div className="w-2.5 h-2.5 bg-purple-300 rounded-full"></div>
+                <ol className="flex items-center mt-2">
+                  <li className="flex-1">
+                    <div className="flex items-center">
+                      <div className="z-10 w-6 h-6 bg-purple-700 rounded-full flex justify-center items-center">
+                        <div className="w-2.5 h-2.5 bg-purple-300 rounded-full"></div>
+                      </div>
+                      <div className="flex-grow h-0.5 bg-purple-300"></div>
                     </div>
-                    <div className="flex-grow h-0.5 bg-purple-300"></div>
-                  </div>
-                  <div className="mt-3">
-                    <h3 className="text-sm font-semibold">Start</h3>
-                    <time className="text-sm text-gray-400">
-                      {project.start}
-                    </time>
-                  </div>
-                </li>
-                <li className="flex-1">
-                  <div className="flex items-center">
-                    <div className="z-10 w-6 h-6 bg-purple-700 rounded-full flex justify-center items-center">
-                      <div className="w-2.5 h-2.5 bg-purple-300 rounded-full"></div>
+                    <div className="mt-3">
+                      <h3 className="text-sm font-semibold">Start</h3>
+                      <time className="text-sm text-gray-400">
+                        {project.start}
+                      </time>
                     </div>
-                  </div>
-                  <div className="mt-3">
-                    <h3 className="text-sm font-semibold">End</h3>
-                    <time className="text-sm text-gray-400">{project.end}</time>
-                  </div>
-                </li>
-              </ol>
+                  </li>
+                  <li className="flex-1">
+                    <div className="flex items-center">
+                      <div className="z-10 w-6 h-6 bg-purple-700 rounded-full flex justify-center items-center">
+                        <div className="w-2.5 h-2.5 bg-purple-300 rounded-full"></div>
+                      </div>
+                    </div>
+                    <div className="mt-3">
+                      <h3 className="text-sm font-semibold">End</h3>
+                      <time className="text-sm text-gray-400">
+                        {project.end}
+                      </time>
+                    </div>
+                  </li>
+                </ol>
 
-              <div className="flex justify-between items-center mt-2 space-x-4">
-                <a
-                  href={project.github}
-                  className="flex items-center hover:text-purple-400"
-                >
-                  <FaGithub className="text-purple100 mr-1" /> GitHub
-                </a>
-                {project.deploy && (
+                <div className="flex justify-between items-center mt-2 space-x-4">
                   <a
-                    href={project.deploy}
+                    href={project.github}
                     className="flex items-center hover:text-purple-400"
                   >
-                    <FaEye className="text-purple100 mr-1" /> View
+                    <FaGithub className="text-purple100 mr-1" /> GitHub
                   </a>
-                )}
+                  {project.deploy && (
+                    <a
+                      href={project.deploy}
+                      className="flex items-center hover:text-purple-400"
+                    >
+                      <FaEye className="text-purple100 mr-1" /> View
+                    </a>
+                  )}
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
         </div>
       </div>
 
@@ -147,6 +183,14 @@ function Projects() {
             >
               <FaTimes size={20} />
             </button>
+            {selectedProject.image && (
+              <img
+                src={selectedProject.image}
+                alt={selectedProject.title}
+                className="w-full h-64 object-cover rounded mb-4"
+                loading="lazy"
+              />
+            )}
 
             <div className="flex justify-between">
               <h3 className="text-xl font-semibold mb-2">
@@ -154,14 +198,26 @@ function Projects() {
               </h3>
               <h2 className="flex items-center">
                 <FaUser className="mr-1" />
-                {selectedProject.people} People
+                {selectedProject.people}{" "}
+                {selectedProject.people === 1 ? "Person" : "People"}
               </h2>
             </div>
 
-            <p>
+            <p className="text-lg font-normal mb-2">
               <i>{selectedProject.description}</i>
               <br />
               <b>Role:</b> <span>{selectedProject.roles.join(", ")}</span>
+              <br />
+              <div className="flex flex-wrap gap-2 mt-1">
+                {selectedProject.framework.map((fw, idx) => (
+                  <div
+                    key={idx}
+                    className="border-2 border-purple-200 w-fit py-2 px-4 rounded-3xl text-purple-200 text-sm font-medium"
+                  >
+                    {fw}
+                  </div>
+                ))}
+              </div>
               <br />
               <b>Workflow & tools:</b>{" "}
               <span>{selectedProject.tools.join(", ")}</span>
@@ -223,7 +279,7 @@ function Projects() {
               {selectedProject.deploy && (
                 <a
                   href={selectedProject.deploy}
-                  className="flex items-center font-normal hover:text-purple-300"
+                  className="flex items-center font-normal border-2 border-purple-200 py-2 px-4 rounded-xl hover:text-purple-500 hover:bg-purple-200"
                 >
                   <FaEye className="text-purple-500 mr-1" />
                   View
