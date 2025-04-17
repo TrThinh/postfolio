@@ -25,7 +25,7 @@ function Contact() {
       initial={{ opacity: 0, y: 50 }}
       animate={controls}
       transition={{ duration: 0.6 }}
-      className="py-16 px-4"
+      className="py-16 px-4 md:mb-2 mb-32"
     >
       <div className="max-w-3xl mx-auto text-center text-white">
         <h2 className="text-3xl font-bold mb-4 flex justify-center">

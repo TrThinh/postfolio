@@ -76,7 +76,7 @@ function Projects() {
               <p
                 key={idx}
                 onClick={() => handleFilterClick(fw)}
-                className={`border-2 border-purple-300 w-fit py-[4px] px-4 rounded-3xl text-lg font-medium 
+                className={`border-2 border-purple-300 w-fit py-[4px] px-4 rounded-3xl md:text-lg text-[10px] font-medium 
         ${
           activeFramework === fw
             ? "bg-purple-300 text-purple-800"
