@@ -1,3 +1,6 @@
+import React from "react";
+import { motion, useAnimation } from "framer-motion";
+import { useInView } from "react-intersection-observer";
 import {
   FaReact,
   FaHtml5,
@@ -13,10 +16,6 @@ import {
   SiTailwindcss,
   SiDotnet,
 } from "react-icons/si";
-import React from "react";
-import { motion, useAnimation } from "framer-motion";
-import { useInView } from "react-intersection-observer";
-import AnimatedTitle from "./Effect/AnimatedTitle";
 
 const skills = [
   {
@@ -106,15 +105,55 @@ function SkillItem({ skill, delay }) {
 }
 
 function Skills() {
+  const letters = "Skills".split("");
+  const titleControls = useAnimation();
+  const [ref, inView] = useInView({ threshold: 0.2 });
+
+  React.useEffect(() => {
+    if (inView) {
+      titleControls.start("visible");
+    } else {
+      titleControls.start("hidden");
+    }
+  }, [inView, titleControls]);
+
+  const letterVariants = {
+    hidden: { y: 100, opacity: 0 },
+    visible: (index) => ({
+      y: 0,
+      opacity: 1,
+      transition: {
+        delay: index * 0.1,
+        type: "spring",
+        stiffness: 120,
+        damping: 20,
+      },
+    }),
+  };
+
   return (
     <section id="skills" className="py-16 px-4 z-10">
-      <div className="max-w-3xl mx-auto text-white">
-        <AnimatedTitle text="Skills" />
-        <div className="grid grid-cols-3 gap-4 md:px-4">
-          {skills.map((skill, index) => (
-            <SkillItem key={index} skill={skill} delay={index * 0.1} />
-          ))}
-        </div>
+      <div ref={ref} className="max-w-3xl mx-auto text-white mb-10 text-center">
+        {letters.map((letter, index) => (
+          <motion.span
+            key={`letter-${index}`}
+            custom={index}
+            variants={letterVariants}
+            initial="hidden"
+            animate={titleControls}
+            className="inline-block text-4xl font-bold text-transparent bg-clip-text 
+              bg-gradient-to-r from-purple-500 to-pink-500 
+              dark:from-purple-300 dark:to-pink-300"
+          >
+            {letter}
+          </motion.span>
+        ))}
+      </div>
+
+      <div className="grid grid-cols-3 gap-4 md:px-4 max-w-3xl mx-auto">
+        {skills.map((skill, index) => (
+          <SkillItem key={index} skill={skill} delay={index * 0.1} />
+        ))}
       </div>
     </section>
   );

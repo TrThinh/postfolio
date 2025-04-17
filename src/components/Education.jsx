@@ -43,6 +43,21 @@ function Education() {
   const [selectedEducation, setSelectedEducation] = useState(null);
   const title = "Education & Experience";
 
+  const letters = title.split("");
+
+  const letterControls = letters.map(() => useAnimation());
+  const [titleRef, titleInView] = useInView({ threshold: 0.3 });
+
+  useEffect(() => {
+    letters.forEach((_, index) => {
+      if (titleInView) {
+        letterControls[index].start({ y: 0, opacity: 1 });
+      } else {
+        letterControls[index].start({ y: 100, opacity: 0 });
+      }
+    });
+  }, [titleInView, letterControls]);
+
   const controls = useAnimation();
   const [ref, inView] = useInView({ threshold: 0.2 });
 
@@ -76,8 +91,27 @@ function Education() {
       className="py-16 px-4 relative z-0 text-white"
     >
       <div className="max-w-4xl mx-auto">
-        <h2 className="text-3xl font-bold mb-8 text-center flex justify-center">
-          <AnimatedTitle text={title} />
+        <h2
+          className="text-3xl font-bold mb-8 text-center flex justify-center"
+          ref={titleRef}
+        >
+          {letters.map((letter, index) => (
+            <motion.span
+              key={`letter-${index}`}
+              initial={{ y: 100, opacity: 0 }}
+              animate={letterControls[index]}
+              transition={{
+                delay: index * 0.05,
+                type: "spring",
+                stiffness: 100,
+                damping: 12,
+              }}
+              className="inline-block text-4xl font-bold text-transparent bg-clip-text 
+        bg-gradient-to-r from-purple-500 to-pink-500 dark:from-purple-300 dark:to-pink-300"
+            >
+              {letter}
+            </motion.span>
+          ))}
         </h2>
 
         <div className="grid md:grid-cols-2 gap-6 md:px-4 z-20">
@@ -144,7 +178,9 @@ function Education() {
             </p>
 
             <div className="mt-3">
-              <span className="text-sm text-gray-400">{selectedEducation.date}</span>
+              <span className="text-sm text-gray-400">
+                {selectedEducation.date}
+              </span>
             </div>
           </div>
         </div>

@@ -17,7 +17,7 @@ function Projects() {
   const letters = title.split("");
 
   const controls = useAnimation();
-  const [ref, inView] = useInView({ threshold: 0.2 });
+  const [ref, inView] = useInView({ threshold: 0.5 });
 
   useEffect(() => {
     if (inView) {

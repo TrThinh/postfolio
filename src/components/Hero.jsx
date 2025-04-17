@@ -193,7 +193,7 @@ function Hero() {
           }
           className="text-purple200 animate-bounce hover:scale-110 hover:text-purple100 transition drop-shadow-xl"
         >
-          <FaArrowDown size={24} />
+          <FaArrowDown size={40} />
         </button>
       </div>
     </section>
