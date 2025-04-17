@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import InfiniteScroll from "./Effect/infiniteScroll";
 
 function Contact() {
-  const title = "Contact Me";
+  const title = "Contact";
   const letters = title.split("");
 
   const items = [
