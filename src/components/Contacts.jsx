@@ -2,7 +2,7 @@ import { FaEnvelope, FaGithub, FaLinkedin, FaPhone } from "react-icons/fa";
 import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { useEffect } from "react";
-import InfiniteScroll from "./Effect/infiniteScroll";
+import InfiniteScroll from "./Effect/InfiniteScroll_temp";
 
 function Contact() {
   const title = "Contact";
