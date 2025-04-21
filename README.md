@@ -25,7 +25,7 @@
 
 🖥️ A personal portfolio website built using **Next.js**, **React**, **Tailwind CSS**, **Framer Motion**, and **GSAP**.
 
-> 🎯 **Live Demo:** [https://trthinhpostfolio.vercel.app](https://trthinhpostfolio.vercel.app)
+> 🎯 **Live Demo:** [https://trthinhportfolio.vercel.app](https://trthinhportfolio.vercel.app)
 
 ![screenshot](https://raw.githubusercontent.com/your-username/your-repo-name/main/public/preview.gif)
 
