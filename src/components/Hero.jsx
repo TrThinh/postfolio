@@ -15,7 +15,7 @@ const DELETING_SPEED = 50;
 const PAUSE_TIME = 1500;
 
 function Hero() {
-  const [rotation, setRotation] = useState([0, 5, 0]);
+  const [rotation, setRotation] = useState([0, 6, 0]);
   const [isAtContact, setIsAtContact] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [text, setText] = useState("");
@@ -23,23 +23,23 @@ function Hero() {
   const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      const scrollY = window.scrollY;
-      const contactSection = document.querySelector("#contact");
-      const contactOffsetTop = contactSection.offsetTop;
-
-      if (scrollY + window.innerHeight >= contactOffsetTop) {
-        setIsAtContact(true);
-      } else {
-        setIsAtContact(false);
-      }
-
-      setRotation([0, scrollY * 0.003, 0]);
+    const handleMouseMove = (event) => {
+      const { clientX, clientY } = event;
+      const windowWidth = window.innerWidth;
+      const windowHeight = window.innerHeight;
+  
+      const x = (clientX / windowWidth) * 1 - 1;
+      const y = -(clientY / windowHeight) * 2 + 1;
+  
+      const rotationY = x * 1.5;
+      const rotationX = -y * 1;
+  
+      setRotation([rotationX, rotationY, 0]);
     };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, []);  
 
   useEffect(() => {
     const currentWord = skills[wordIndex];
