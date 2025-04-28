@@ -22,7 +22,7 @@ function EducationItem({ title, subtitle, date, delay }) {
       initial={{ opacity: 0, y: 50 }}
       animate={controls}
       transition={{ duration: 0.6, delay }}
-      className="p-6 rounded text-purple-100 border-purple-300 shadow-purple300 shadow-lg transform transition-transform duration-300 hover:scale-105 hover:-rotate-1 hover:translate-y-1 cursor-pointer"
+      className="p-6 rounded text-purple-100 border-purple-300 shadow-purple300 shadow-lg transform transition-transform duration-300 hover:scale-105 hover:-rotate-1 hover:translate-y-1"
     >
       <div className="flex justify-between">
         <h3 className="text-xl font-semibold mb-2">{title}</h3>
@@ -122,7 +122,7 @@ function Education() {
             delay={0.1}
           />
           <EducationItem
-            title="VSTEP B2 English Certificate"
+            title="VSTEP B1 English Certificate"
             subtitle="English Proficiency"
             date="Issued in 2024"
             delay={0.2}
