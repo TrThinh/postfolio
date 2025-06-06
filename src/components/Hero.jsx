@@ -113,20 +113,6 @@ function Hero() {
           </div>
         </div>
 
-        <div className="hidden sm:block fixed top-0 left-0 md:w-1/6 lg:w-1/6 xl:w-1/5 md:h-[400px] lg:h-[400px] xl:h-[500px] pointer-events-none z-10">
-          <p className="fixed md:w-1/6 lg:w-1/6 xl:w-1/5 top-20 text-xl font-extrabold bg-gradient-to-r from-[#240046] via-[#5a189a] to-[#c77dff] bg-clip-text text-transparent">
-            Thịnh
-          </p>
-          <Canvas camera={{ position: [0, 1, 4], fov: 50 }}>
-            <ambientLight intensity={0.7} />
-            <directionalLight position={[5, 5, 5]} />
-            <Suspense fallback={null}>
-              <Model rotation={rotation} />
-            </Suspense>
-            <OrbitControls enableZoom={false} enablePan={false} />
-          </Canvas>
-        </div>
-
         <div className="flex justify-center">
           {window.innerWidth < 769 ? (
             <a
@@ -156,12 +142,12 @@ function Hero() {
                 ✕
               </button>
               <iframe
-                src="/cv.pdf"
+                src="/Đỗ Trọng Thịnh - .Net Developer.pdf"
                 title="My CV"
                 className="w-full h-full"
               ></iframe>
               <a
-                href="/cv.pdf"
+                href="/Đỗ Trọng Thịnh - .Net Developer.pdf"
                 download
                 className="absolute bottom-4 right-4 w-fit text-purple-700 border-2 border-purple-600 font-semibold px-6 py-2 rounded-lg transition"
               >
